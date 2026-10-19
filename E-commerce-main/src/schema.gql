@@ -1,0 +1,94 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type OneUserResponse {
+  _id: ID!
+  createdAt: String!
+  DOB: String
+  updatedAt: String
+  changeCredentialsTime: String
+  deletedAt: String
+  confirmEmail: String
+  phone: String
+  email: String!
+  firstName: String!
+  lastName: String!
+  username: String!
+  password: String
+  gender: GenderEnum!
+  provider: ProviderEnum!
+  role: RoleEnum!
+  lang: LanguageEnum!
+  profilePicture: String
+  profileCoverPictures: [String!]!
+}
+
+enum GenderEnum {
+  MALE
+  FEMALE
+}
+
+enum ProviderEnum {
+  SYSTEM
+  GOOGLE
+}
+
+enum RoleEnum {
+  USER
+  ADMIN
+}
+
+enum LanguageEnum {
+  AR
+  EN
+}
+
+type SayHiResponse {
+  message: String!
+  age: Int
+}
+
+type OneProductResponse {
+  _id: ID!
+  brandId: ID!
+  categoryId: ID!
+  createdBy: OneUserResponse!
+  updatedBy: ID
+  notifyUsers: [ID!]
+  originalPrice: Float!
+  discountPercent: Float!
+  salePrice: Float!
+  finalPrice: Float!
+  stock: Int!
+  rating: Int
+  createdAt: DateTime!
+  updatedAt: String
+  deletedAt: String
+  restoredAt: String
+  description: String!
+  name: String!
+  slug: String!
+  productId: String!
+  gallery: [String!]
+  image: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type PaginateProductsResponse {
+  docs: [OneProductResponse!]!
+  currentPage: Int
+  pages: Int
+  size: Int
+}
+
+type Query {
+  allProducts(page: Int, size: Int, search: String): PaginateProductsResponse!
+
+  """FIRST API"""
+  Welcome(name: String, age: Int): [SayHiResponse!]!
+}
